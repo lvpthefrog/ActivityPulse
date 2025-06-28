@@ -1,0 +1,213 @@
+﻿<Window x:Class="ActivityPulse.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Activity Pulse" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource WindowBackground}"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Enhanced Sidebar -->
+        <Border Grid.Column="0" Background="{StaticResource SidebarBackground}" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Logo/Title Section -->
+                <StackPanel Grid.Row="0" Margin="24,32,24,32">
+                    <Grid Width="80" Height="80" HorizontalAlignment="Center" Margin="0,0,0,20">
+                        <Ellipse Width="60" Height="60"
+                             Fill="White"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             StrokeThickness="0">
+                            <Ellipse.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="2" Color="Black" Opacity="0.15"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+
+                        <Image Source="/Resources/icon.png"
+                           Width="60" Height="60"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Stretch="Uniform"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Grid>
+
+
+                    <TextBlock Text="ActivityPulse" 
+                               FontSize="22" 
+                               FontWeight="Bold" 
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Productivity Insights" 
+                               FontSize="13" 
+                               Foreground="{StaticResource TextLight}"
+                               HorizontalAlignment="Center"
+                               FontWeight="Medium"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Navigation Menu -->
+                <StackPanel Grid.Row="1" Margin="16,8">
+                    <RadioButton Style="{StaticResource SidebarRadioButtonStyle}" 
+                                 GroupName="Navigation"
+                                 IsChecked="True"
+                                 Command="{Binding NavigateCommand}"
+                                 CommandParameter="Summary">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📊" 
+                                       FontSize="18" 
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,12,0"/>
+                            <TextBlock Text="Summary" 
+                                       FontSize="16" 
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource SidebarRadioButtonStyle}" 
+                                 GroupName="Navigation"
+                                 Command="{Binding NavigateCommand}"
+                                 CommandParameter="Settings">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⚙️" 
+                                       FontSize="18" 
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,12,0"/>
+                            <TextBlock Text="Settings" 
+                                       FontSize="16" 
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Spacer for future items -->
+                    <Border Height="20" Background="Transparent"/>
+
+                    <!-- Future navigation items with better structure -->
+                    <!--<RadioButton Style="{StaticResource SidebarRadioButtonStyle}" 
+                                 GroupName="Navigation"
+                                 Command="{Binding NavigateCommand}"
+                                 CommandParameter="Applications">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📱" 
+                                       FontSize="18" 
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,12,0"/>
+                            <TextBlock Text="Applications" 
+                                       FontSize="16" 
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource SidebarRadioButtonStyle}" 
+                                 GroupName="Navigation"
+                                 Command="{Binding NavigateCommand}"
+                                 CommandParameter="Reports">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📈" 
+                                       FontSize="18" 
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,12,0"/>
+                            <TextBlock Text="Reports" 
+                                       FontSize="16" 
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>-->
+                </StackPanel>
+
+                <!-- Enhanced Status Section -->
+                <StackPanel Grid.Row="2" Margin="24,24">
+                    <Border Background="#7c3aed" 
+                            CornerRadius="12" 
+                            Padding="16,12">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" Color="Black"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                <Ellipse Width="8" Height="8" 
+                                         Fill="{StaticResource SuccessGreen}" 
+                                         VerticalAlignment="Center"
+                                         Margin="0,0,8,0"/>
+                                <TextBlock Text="Monitoring Active" 
+                                           Foreground="White" 
+                                           FontWeight="SemiBold"
+                                           FontSize="13"/>
+                            </StackPanel>
+                            <TextBlock x:Name="StatusText"
+                                       Text="Tracking your productivity..." 
+                                       Foreground="{StaticResource TextLight}" 
+                                       FontSize="12"
+                                       LineHeight="16"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Bar -->
+            <Border Grid.Row="0" 
+                    Background="{StaticResource CardBackground}"
+                    Padding="32,24"
+                    BorderBrush="{StaticResource BorderColor}" 
+                    BorderThickness="0,0,0,1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left side - Page Title -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock x:Name="PageTitleText"
+                                   Style="{StaticResource H1Style}"
+                                   Text="{Binding CurrentPageTitle, FallbackValue='Summary'}"/>
+                        <TextBlock x:Name="PageQuoute"
+                                   Style="{StaticResource SecondaryTextStyle}"
+                                   Text="{Binding CurrentQuote, FallbackValue='Quote'}"/>
+                    </StackPanel>
+
+                    <!-- Right side - Date -->
+                    <StackPanel Grid.Column="1" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Center">
+                        <TextBlock x:Name="DateText"
+                                   Style="{StaticResource SecondaryTextStyle}"
+                                   Text="{Binding CurrentDate, FallbackValue='Today'}"
+                                   FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Content Frame -->
+            <ContentControl x:Name="MainContentControl" 
+                   Grid.Row="1"
+                   Margin="32"
+                   Background="{StaticResource WindowBackground}"/>
+        </Grid>
+    </Grid>
+</Window>
